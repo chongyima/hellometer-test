@@ -1,15 +1,49 @@
-import React, { useEffect, useState } from "react";
-// import { Route, Routes, Navigate, Link, withRouter } from "react-router-dom";
-
+import React from "react";
+import { MDBDataTable } from "mdbreact";
+import Chart from "./Chart";
 export default function Home(props) {
-  const [orders, setOrders] = useState([]);
-  useEffect(() => {
-    fetch("http://localhost:8000/api/orders/all")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("data", data);
-        setOrders(data);
-      });
-  }, []);
-  return <div></div>;
+  return (
+    <div className="container">
+      {props.orders && (
+        <>
+          <MDBDataTable
+            striped
+            bordered
+            small
+            data={{
+              columns: [
+                { label: "storeId", field: "storeId", sort: "asc", width: 150 },
+                {
+                  label: "arrivalTime",
+                  field: "arrivalTime",
+                  sort: "asc",
+                  width: 150,
+                },
+                {
+                  label: "orderTime",
+                  field: "orderTime",
+                  sort: "asc",
+                  width: 150,
+                },
+                {
+                  label: "pickupTime",
+                  field: "pickupTime",
+                  sort: "asc",
+                  width: 150,
+                },
+                {
+                  label: "totalTime",
+                  field: "totalTime",
+                  sort: "asc",
+                  width: 150,
+                },
+              ],
+              rows: props.orders,
+            }}
+          />
+          <Chart orders={props.orders}></Chart>
+        </>
+      )}
+    </div>
+  );
 }
