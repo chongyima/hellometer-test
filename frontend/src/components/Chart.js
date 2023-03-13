@@ -43,7 +43,7 @@ export default function Chart(props) {
     theme: "light2",
     animationEnabled: true,
     title: {
-      text: "Number of orders per hour for each store",
+      text: "Order count per hour for each store",
     },
     subtitles: [
       {
